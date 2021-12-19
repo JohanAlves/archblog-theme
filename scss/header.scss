@@ -1,0 +1,162 @@
+/** VARIABLES **/
+
+$primary: #6b705c;
+$primary-alt: lighten($primary,10%);
+$bg: white;
+$bg-canvas:#EDEBE9;
+$breakpoint: 768px;
+$maxwidth:1400px;
+
+
+@mixin desktop {   
+     @media (min-width: $breakpoint) { @content ; }
+  }
+
+
+/** HEADER **/
+
+.header{
+    
+
+    .container{
+        display: flex;
+        margin: 0 auto;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        overflow-x: hidden;
+        max-width: $maxwidth;
+        a{
+            text-decoration: none;
+        }
+    }
+
+    &__logo p{
+        font-size: 25px;
+        margin: 0;
+        padding: 0;
+        color: $primary;
+        font-weight: bold;
+    }
+
+    &__mobile{
+        cursor: pointer;
+        order:1;
+
+        @include desktop{
+            display: none;
+        }
+    }
+    .mobile__overlay{
+        position: absolute;
+        z-index: 1000;
+        top: 0;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow:hidden;
+        pointer-events: none;
+        background-color: transparent;
+        transition: .3s;
+
+        @include desktop{
+            position: initial;
+            width: auto;
+            margin-left: auto;            
+            height: auto;
+            pointer-events: initial;            
+        }
+          
+    }
+    .mobile__overlay.overlay_active{
+        background-color: rgba(0,0,0,.7);
+        pointer-events: initial;
+
+    }
+    .nav-menu{
+        position: absolute; 
+        top: 0;
+        right: 0;       
+        height: 100vh;
+        background-color: $bg-canvas;
+        width: 80vw;
+        transform: translateX(100%);
+        transition: .3s;
+
+        @include desktop{
+            position: initial;
+            transform: translateX(0);
+            height: auto;
+            width: auto;
+            background-color: transparent;
+        }
+
+        &__close{
+            position: absolute;
+            right: 0;
+            margin-left: auto;
+            padding: 50px 20px 20px 20px;
+            cursor: pointer;
+            @include desktop{
+                display: none;
+            }
+            
+        }
+
+        ul{
+            padding: 70px 0;
+
+            @include desktop{
+                display: flex;
+                padding: 0px;
+                gap: 10px;
+                
+            }
+
+            li{
+                list-style: none;                
+                a{
+                    display: block;
+                    text-decoration: none;                    
+                    color:$primary;
+                    padding: 20px;
+                    &:hover{
+                        background-color: $primary-alt;
+                        color: $bg-canvas;
+                    }
+                    @include desktop{
+                        padding: 5px 0 5px 20px;  
+                        &:hover{
+                            background-color: transparent;
+                            color: $primary-alt;
+                        }          
+                    }                    
+                }                
+                
+            }
+        }
+
+    }
+
+    .nav-menu.offcanvas_active{
+        transform: translateX(0%);
+    }
+
+    .search-icon{
+        color: $primary;
+        margin-left: auto;
+        font-size: 14px;
+        cursor: pointer;
+        padding-right: 15px;
+        &:hover{
+            color: $primary-alt;
+        }
+        @include desktop{
+            margin-left: initial;
+            padding-left: 15px;
+        }
+    }
+}
+
+
+
